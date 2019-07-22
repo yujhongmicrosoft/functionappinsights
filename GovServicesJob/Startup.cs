@@ -10,7 +10,8 @@ using System.Collections.Generic;
 using Microsoft.ApplicationInsights.AspNetCore;
 using Microsoft.Extensions.Options;
 using System.Linq;
-using Microsoft.ApplicationInsights;
+//using Microsoft.ApplicationInsights;
+using Microsoft.Azure.WebJobs.Logging.ApplicationInsights;
 
 [assembly: FunctionsStartup(typeof(GovServicesJob.Startup))]
 namespace GovServicesJob
@@ -32,7 +33,7 @@ namespace GovServicesJob
              }
          }
      });
-            builder.Services.AddApplicationInsightsTelemetry("2cff0d83-f8cc-f797-9f96-7fcf7c30df0e");
+            //builder.Services.AddApplicationInsightsTelemetry("2cff0d83-f8cc-f797-9f96-7fcf7c30df0e");
             //builder.Services.AddSingleton<TelemetryClient>(s => new TelemetryClient());
             builder.Services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((module, o) => module.QuickPulseServiceEndpoint = "https://quickpulse.applicationinsights.us/QuickPulseService.svc");
             builder.Services.AddSingleton<IApplicationIdProvider>(_ => new ApplicationInsightsApplicationIdProvider() { ProfileQueryEndpoint = "https://dc.applicationinsights.us/api/profiles/{0}/appId" });
